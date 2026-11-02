@@ -337,7 +337,9 @@ parse_options() {
             --network|--ports|--discovery-timeout|--scan-timeout|--ssh-check-timeout|--hydra-timeout|--ssh-wait|--arp-duration) ;;
             *) die "Unknown option: $option. Use --help for instructions." ;;
         esac
-        (( $# >= 2 )) && [[ -n "$2" ]] || die "Missing value for $option."
+        if (( $# < 2 )) || [[ -z "$2" ]]; then
+            die "Missing value for $option."
+        fi
         value="$2"
         case "$option" in
             --network)
@@ -345,7 +347,7 @@ parse_options() {
                 NETWORK_OVERRIDE="$value"
                 ;;
             --ports)
-                valid_port_list "$value" || die "Use TCP ports/ranges from 0 to 65535, for example 22,80,8000-8100."
+                valid_port_list "$value" || die "Use TCP ports/ranges from 1 to 65535, for example 22,80,8000-8100."
                 NMAP_PORTS="$value"
                 ;;
             *)
