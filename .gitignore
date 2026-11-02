@@ -1,0 +1,24 @@
+# Local secrets and assessment output
+.env
+.env.*
+!.env.example
+credentials*.txt
+password*.txt
+*.log
+*.zip
+*.pcap
+*.pcapng
+*.mem
+*.vmem
+*.dmp
+*.img
+*.raw
+analysis_*/
+results/
+logs/
+reports/generated/
+training-site/
+__pycache__/
+.venv/
+.idea/
+.vscode/
